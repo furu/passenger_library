@@ -25,8 +25,7 @@ A core concept in dynamic process scaling is that of the **maximum process concu
 <%= render_partial("../request_load_balancing/process_concurrency_concept.md", locals: locals) %>
 
 <% if language_concurrency_model == :evented %>
-  The maximum concurrency setting is very important for Passenger's implementation of automatic process scaling. New processes are not spawned until the current processes have reached their concurrency limit, 
-  so a limit must be set for autoscaling to work.
+  The maximum concurrency setting is very important for Passenger's implementation of automatic process scaling. New processes are not spawned until the current processes have reached their concurrency limit, so a limit must be set for autoscaling to work.
 <% end %>
 
 ## A new process is spawned when the concurrency limit is reached
