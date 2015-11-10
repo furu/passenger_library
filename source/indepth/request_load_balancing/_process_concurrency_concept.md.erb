@@ -8,7 +8,7 @@
   For <%= language_name %> applications, the maximum process concurrency is assumed to be *unlimited*. This is because <%= language_runtime_name %> uses <%= language_concurrency_model_name_plural %> for concurrency which is very lightweight, so it can handle a virtually unlimited number of requests concurrently.
 
   <% if language_concurrency_model == :evented %>
-  Having said that, as a <%= language_runtime_name %> process handles more concurrent requests, it is normal for performance to degrade. The practical concurrency is not really unlimited, and the limit varies for every application and every workload.
+  In practice it may still be more efficient to limit the maximum concurrency and spread concurrent requests across multiple application instances, but this depends very much on the application and workload type. 
   <% end %>
 <% else %>
   <% raise "Unknown concurrency scenario: language_default_concurrency=#{language_default_concurrency}, language_max_concurrency=#{language_max_concurrency}" %>

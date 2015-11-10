@@ -25,14 +25,15 @@ A core concept in dynamic process scaling is that of the **maximum process concu
 <%= render_partial("../request_load_balancing/process_concurrency_concept.md", locals: locals) %>
 
 <% if language_concurrency_model == :evented %>
-  For dynamic process scaling to work, Passenger needs to [know at approximately how many requests the performance of a single process begins to degrade](#assume_application_concurrency). You will learn later why this is so and how this is done.
+  The maximum concurrency setting is very important for Passenger's implementation of automatic process scaling. New processes are not spawned until the current processes have reached their concurrency limit, 
+  so a limit must be set for autoscaling to work.
 <% end %>
 
 ## A new process is spawned when the concurrency limit is reached
 
 Passenger keeps track of the number of requests a process is handling. When all processes have reached their maximum concurrency -- that is, when they're handling exactly as many requests as their maximum concurrency indicate they can -- then Passenger will decide to spawn a new process.
 
-This behavior is deeply coupled to the [request load balancing logic](<%= url_for "/indepth/#{language_type}/request_load_balancing.html" %>), so you should read up on that too.
+Note that this behavior is intimately coupled with the [request load balancing logic](<%= url_for "/indepth/#{language_type}/request_load_balancing.html" %>).
 
 <% if language_default_concurrency == 0 %>
   <h3>Making dynamic scaling work through the "assume application concurrency" setting</h3>
